@@ -4,7 +4,10 @@ from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-cookie_driver = webdriver.Edge()
+options = webdriver.EdgeOptions()
+options.add_experimental_option("excludeSwitches", ["enable-logging"])
+
+cookie_driver = webdriver.Edge(options=options)
 oba_login_url = "https://mebbisyd.meb.gov.tr/ssologinBIDB.aspx?id=72&URL=http://giris.eba.gov.tr/EBA_GIRIS/GirisKontrol/oba"
 phpsessid_cookie = ""
 cookie_driver.get(oba_login_url)
@@ -20,7 +23,6 @@ while len(phpsessid_cookie) <= 0:
 cookie_driver.close()
 print("Giriş başarılı!")
 
-options = webdriver.EdgeOptions()
 options.headless = True
 options.add_argument("--mute-audio")
 
